@@ -21,12 +21,13 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from rest_framework import routers
 from eventComponents.views import LinkAPIList, LinkAPIUpdate, LinkAPIDestroy, TaskAPIList, TaskAPIUpdate, TaskAPIDestroy, StatusViewSet, Type_LinkViewSet
-from event.views import EventAPIList, EventAPIUpdate, EventAPIDestroy
+from event.views import EventAPIList, EventAPIUpdate, EventAPIDestroy, PointViewSet
 from account.views import ProfileAPIList, ProfileAPIUpdate, ProfileAPIDestroy
 
 router = routers.SimpleRouter()
-router.register(r'type_event', Type_LinkViewSet)
+router.register(r'type_link', Type_LinkViewSet)
 router.register(r'status', StatusViewSet)
+router.register(r'point', PointViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),

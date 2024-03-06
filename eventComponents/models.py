@@ -19,6 +19,8 @@ class Type_Link(models.Model):
 
 class Link(models.Model):
     link = models.CharField(max_length=10000)
+    name = models.CharField(max_length=1000)
+    event = models.ForeignKey(Event, verbose_name='Событие', on_delete=models.CASCADE)
     type = models.ForeignKey(Type_Link, on_delete=models.CASCADE)
 
 
@@ -29,7 +31,6 @@ class Task(models.Model):
     status = models.ForeignKey(Status, on_delete=models.CASCADE, null=True)
     event = models.ForeignKey(Event, verbose_name='Событие', on_delete=models.CASCADE)
     owner = models.ForeignKey(User, verbose_name='Организация', on_delete=models.CASCADE, related_name='owner')
-    users = models.ManyToManyField(User, related_name='users')
 
     def __str__(self):
         return self.title
