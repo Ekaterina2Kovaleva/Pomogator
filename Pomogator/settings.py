@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'event.apps.EventConfig',
     'eventComponents.apps.EventComponentsConfig',
     'account.apps.AccountConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

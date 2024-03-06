@@ -1,3 +1,48 @@
 from django.shortcuts import render
+from rest_framework import viewsets, generics, permissions
+from rest_framework.authentication import TokenAuthentication
+from .models import Task, Type_Link, Status, Link
+from .serializers import TaskSerializer, Type_LinkSerializer, StatusSerializer, LinkSerializer
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
-# Create your views here.
+
+class Type_LinkViewSet(viewsets.ModelViewSet):
+    queryset = Type_Link.objects.all()
+    serializer_class = Type_LinkSerializer
+
+
+class StatusViewSet(viewsets.ModelViewSet):
+    queryset = Type_Link.objects.all()
+    serializer_class = StatusSerializer
+
+
+class TaskAPIList(generics.ListCreateAPIView):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+
+
+class TaskAPIUpdate(generics.RetrieveUpdateAPIView):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
+
+
+class TaskAPIDestroy(generics.RetrieveDestroyAPIView):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
+
+
+class LinkAPIList(generics.ListCreateAPIView):
+    queryset = Link.objects.all()
+    serializer_class = LinkSerializer
+
+
+
+class LinkAPIUpdate(generics.RetrieveUpdateAPIView):
+    queryset = Link.objects.all()
+    serializer_class = LinkSerializer
+
+
+class LinkAPIDestroy(generics.RetrieveDestroyAPIView):
+    queryset = Link.objects.all()
+    serializer_class = LinkSerializer

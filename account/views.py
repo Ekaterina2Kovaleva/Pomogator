@@ -1,3 +1,22 @@
-from django.shortcuts import render
+from rest_framework import viewsets, generics, permissions
+from .models import Profile
+from .permissions import IsOwnerOrReadOnly
+from .serializers import ProfileSerializer
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
-# Create your views here.
+
+class ProfileAPIList(generics.ListCreateAPIView):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+
+
+
+class ProfileAPIUpdate(generics.RetrieveUpdateAPIView):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+
+
+
+class ProfileAPIDestroy(generics.RetrieveDestroyAPIView):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
