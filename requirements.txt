@@ -1,2 +1,1 @@
-djangorestframework
-djoser
+djangorestframework>=3.12.1,<3.13.0
