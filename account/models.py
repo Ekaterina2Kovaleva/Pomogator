@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.db import models
 
 from event.models import Event
-from eventComponents.models import Task
+
 
 
 class Role(models.Model):
@@ -14,6 +14,7 @@ class Role(models.Model):
 
 class Profile(models.Model):
     owner = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    image = models.ImageField(upload_to ='uploads/')
     last_name = models.CharField(verbose_name='Фамилия', max_length=255, blank=True, null=True)
     first_name = models.CharField(verbose_name='Имя', max_length=255, blank=True, null=True)
     patronymic = models.CharField(verbose_name='Отчество', max_length=255, null=True, blank=True)

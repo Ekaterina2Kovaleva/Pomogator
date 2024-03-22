@@ -1,9 +1,14 @@
 from rest_framework import viewsets, generics, permissions
-from .models import Profile
+from .models import Profile, Role
 from .permissions import IsOwnerOrReadOnly
-from .serializers import ProfileSerializer
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from .serializers import ProfileSerializer, RoleSerializer
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser
 
+
+class RoleViewSet(viewsets.ModelViewSet):
+    queryset = Role.objects.all()
+    serializer_class = RoleSerializer
+    permission_classes = (IsAdminUser,)
 
 class ProfileAPIList(generics.ListCreateAPIView):
     queryset = Profile.objects.all()

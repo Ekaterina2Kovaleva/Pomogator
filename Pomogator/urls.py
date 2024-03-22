@@ -20,14 +20,14 @@ from django.urls import path
 from django.contrib import admin
 from django.urls import path, include, re_path
 from rest_framework import routers
-from eventComponents.views import LinkAPIList, LinkAPIUpdate, LinkAPIDestroy, TaskAPIList, TaskAPIUpdate, TaskAPIDestroy, StatusViewSet, Type_LinkViewSet
-from event.views import EventAPIList, EventAPIUpdate, EventAPIDestroy, PointViewSet
+from event.views import (EventAPIList, EventAPIUpdate, EventAPIDestroy, ProjectAPIUpdate, ProjectAPIList,
+                         ProjectAPIDestroy, LinkAPIList, LinkAPIUpdate, LinkAPIDestroy, TaskAPIList, TaskAPIUpdate,
+                         TaskAPIDestroy, StatusViewSet, Type_LinkViewSet)
 from account.views import ProfileAPIList, ProfileAPIUpdate, ProfileAPIDestroy
 
 router = routers.SimpleRouter()
 router.register(r'type_link', Type_LinkViewSet)
 router.register(r'status', StatusViewSet)
-router.register(r'point', PointViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -36,6 +36,9 @@ urlpatterns = [
     path('api/v1/event/', EventAPIList.as_view()),
     path('api/v1/event/<int:pk>/', EventAPIUpdate.as_view()),
     path('api/v1/eventdelete/<int:pk>/', EventAPIDestroy.as_view()),
+    path('api/v1/project/', ProjectAPIList.as_view()),
+    path('api/v1/project/<int:pk>/', ProjectAPIUpdate.as_view()),
+    path('api/v1/projectdelete/<int:pk>/', ProjectAPIDestroy.as_view()),
     path('api/v1/taskdelete/<int:pk>/', TaskAPIDestroy.as_view()),
     path('api/v1/task/', TaskAPIList.as_view()),
     path('api/v1/task/<int:pk>/', TaskAPIUpdate.as_view()),
