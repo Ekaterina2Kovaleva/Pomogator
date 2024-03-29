@@ -8,7 +8,6 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser
 class RoleViewSet(viewsets.ModelViewSet):
     queryset = Role.objects.all()
     serializer_class = RoleSerializer
-    permission_classes = (IsAdminUser,)
 
 class ProfileAPIList(generics.ListCreateAPIView):
     queryset = Profile.objects.all()

@@ -4,7 +4,7 @@ from .permissions import IsOwnerOrReadOnly
 from .serializers import EventSerializer, ProjectSerializer
 from .models import Task, Type_Link, Status, Link
 from .serializers import TaskSerializer, Type_LinkSerializer, StatusSerializer, LinkSerializer
-from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 
 class EventAPIList(generics.ListCreateAPIView):
@@ -46,13 +46,13 @@ class ProjectAPIDestroy(generics.RetrieveDestroyAPIView):
 class Type_LinkViewSet(viewsets.ModelViewSet):
     queryset = Type_Link.objects.all()
     serializer_class = Type_LinkSerializer
-    permission_classes = (IsAdminUser,)
+
 
 
 class StatusViewSet(viewsets.ModelViewSet):
     queryset = Type_Link.objects.all()
     serializer_class = StatusSerializer
-    permission_classes = (IsAdminUser,)
+
 
 
 class TaskAPIList(generics.ListCreateAPIView):

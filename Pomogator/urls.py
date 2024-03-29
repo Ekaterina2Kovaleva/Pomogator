@@ -24,6 +24,7 @@ from event.views import (EventAPIList, EventAPIUpdate, EventAPIDestroy, ProjectA
                          ProjectAPIDestroy, LinkAPIList, LinkAPIUpdate, LinkAPIDestroy, TaskAPIList, TaskAPIUpdate,
                          TaskAPIDestroy, StatusViewSet, Type_LinkViewSet)
 from account.views import ProfileAPIList, ProfileAPIUpdate, ProfileAPIDestroy
+from google_docs.views import FileCreateAPIView
 
 router = routers.SimpleRouter()
 router.register(r'type_link', Type_LinkViewSet)
@@ -48,5 +49,6 @@ urlpatterns = [
     path('api/v1/profiledelete/<int:pk>/', ProfileAPIDestroy.as_view()),
     path('api/v1/profile/', ProfileAPIList.as_view()),
     path('api/v1/profile/<int:pk>/', ProfileAPIUpdate.as_view()),
-
+    path('files/', FileCreateAPIView.as_view(), name="file-create"),
+    path('', include('oauth.urls')),
 ]
