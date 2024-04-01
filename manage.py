@@ -3,6 +3,9 @@
 import os
 import sys
 
+import flask
+import requests
+
 
 def main():
     """Run administrative tasks."""

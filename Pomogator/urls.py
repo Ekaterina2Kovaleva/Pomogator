@@ -20,14 +20,16 @@ from django.urls import path
 from django.contrib import admin
 from django.urls import path, include, re_path
 from rest_framework import routers
-from eventComponents.views import LinkAPIList, LinkAPIUpdate, LinkAPIDestroy, TaskAPIList, TaskAPIUpdate, TaskAPIDestroy, StatusViewSet, Type_LinkViewSet
-from event.views import EventAPIList, EventAPIUpdate, EventAPIDestroy, PointViewSet
-from account.views import ProfileAPIList, ProfileAPIUpdate, ProfileAPIDestroy
+from event.views import (EventAPIList, EventAPIUpdate, EventAPIDestroy, ProjectAPIUpdate, ProjectAPIList,
+                         ProjectAPIDestroy, LinkAPIList, LinkAPIUpdate, LinkAPIDestroy, TaskAPIList, TaskAPIUpdate,
+                         TaskAPIDestroy, StatusViewSet, Type_LinkViewSet)
+from google_docs.views import FileCreateAPIView
+from oauth.endpoint.views import RoleViewSet
 
 router = routers.SimpleRouter()
 router.register(r'type_link', Type_LinkViewSet)
 router.register(r'status', StatusViewSet)
-router.register(r'point', PointViewSet)
+router.register(r'role', RoleViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -36,14 +38,15 @@ urlpatterns = [
     path('api/v1/event/', EventAPIList.as_view()),
     path('api/v1/event/<int:pk>/', EventAPIUpdate.as_view()),
     path('api/v1/eventdelete/<int:pk>/', EventAPIDestroy.as_view()),
+    path('api/v1/project/', ProjectAPIList.as_view()),
+    path('api/v1/project/<int:pk>/', ProjectAPIUpdate.as_view()),
+    path('api/v1/projectdelete/<int:pk>/', ProjectAPIDestroy.as_view()),
     path('api/v1/taskdelete/<int:pk>/', TaskAPIDestroy.as_view()),
     path('api/v1/task/', TaskAPIList.as_view()),
     path('api/v1/task/<int:pk>/', TaskAPIUpdate.as_view()),
     path('api/v1/linkdelete/<int:pk>/', LinkAPIDestroy.as_view()),
     path('api/v1/link/', LinkAPIList.as_view()),
     path('api/v1/link/<int:pk>/', LinkAPIUpdate.as_view()),
-    path('api/v1/profiledelete/<int:pk>/', ProfileAPIDestroy.as_view()),
-    path('api/v1/profile/', ProfileAPIList.as_view()),
-    path('api/v1/profile/<int:pk>/', ProfileAPIUpdate.as_view()),
-
+    path('files/', FileCreateAPIView.as_view(), name="file-create"),
+    path('api/v1/', include('oauth.urls')),
 ]
