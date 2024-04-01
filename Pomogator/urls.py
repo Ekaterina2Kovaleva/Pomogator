@@ -23,12 +23,13 @@ from rest_framework import routers
 from event.views import (EventAPIList, EventAPIUpdate, EventAPIDestroy, ProjectAPIUpdate, ProjectAPIList,
                          ProjectAPIDestroy, LinkAPIList, LinkAPIUpdate, LinkAPIDestroy, TaskAPIList, TaskAPIUpdate,
                          TaskAPIDestroy, StatusViewSet, Type_LinkViewSet)
-from account.views import ProfileAPIList, ProfileAPIUpdate, ProfileAPIDestroy
 from google_docs.views import FileCreateAPIView
+from oauth.endpoint.views import RoleViewSet
 
 router = routers.SimpleRouter()
 router.register(r'type_link', Type_LinkViewSet)
 router.register(r'status', StatusViewSet)
+router.register(r'role', RoleViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -46,9 +47,6 @@ urlpatterns = [
     path('api/v1/linkdelete/<int:pk>/', LinkAPIDestroy.as_view()),
     path('api/v1/link/', LinkAPIList.as_view()),
     path('api/v1/link/<int:pk>/', LinkAPIUpdate.as_view()),
-    path('api/v1/profiledelete/<int:pk>/', ProfileAPIDestroy.as_view()),
-    path('api/v1/profile/', ProfileAPIList.as_view()),
-    path('api/v1/profile/<int:pk>/', ProfileAPIUpdate.as_view()),
     path('files/', FileCreateAPIView.as_view(), name="file-create"),
-    path('', include('oauth.urls')),
+    path('api/v1/', include('oauth.urls')),
 ]
